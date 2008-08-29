@@ -1,0 +1,3 @@
+stm32x mass_erase 0
+flash write_image erase firmware_stm32 0x8000000
+reset halt

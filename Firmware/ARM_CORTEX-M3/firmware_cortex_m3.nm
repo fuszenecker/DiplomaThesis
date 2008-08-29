@@ -1,0 +1,11 @@
+00000000 T _pointers
+00000000 T stack_pointer
+00000004 T vectors
+00000040 T sysinit
+00000040 T _text
+00000060 T _etext
+20000000 A _end
+20000000 T _bss
+20000000 T _data
+20000000 T _ebss
+20000000 T _edata
