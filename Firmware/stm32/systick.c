@@ -1,7 +1,16 @@
+// ---------------------------------------------------------------------------
+// This header file contains the function implementations for SYSTICK timer.
+// ---------------------------------------------------------------------------
+
 #include <systick.h>
 #include <stm32f10x_lib.h>
 #include <stm32f10x_systick.h>
 #include <config.h>
+
+// ---------------------------------------------------------------------------
+// This function initializes the SYSTICK timer. The period contains the
+// "FREQUENCY" of the timer interrupt
+// ---------------------------------------------------------------------------
 
 int systick_init(unsigned int freq) {
     SysTick_SetReload(CLOCK_FREQ * PLL_MUL / PLL_DIV / 8 / freq * 1024);

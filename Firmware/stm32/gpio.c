@@ -1,6 +1,15 @@
+// ---------------------------------------------------------------------------
+// This file contains the function definitions for General Purpose
+// Input-Output ports.
+// ---------------------------------------------------------------------------
+
 #include <gpio.h>
 #include <stm32f10x_gpio.h>
 #include <stm32f10x_rcc.h>
+
+// ---------------------------------------------------------------------------
+// This function initializes the PORT B port.
+// ---------------------------------------------------------------------------
 
 void gpio_init() {
     GPIO_InitTypeDef GPIO_InitStructure;
@@ -17,9 +26,19 @@ void gpio_init() {
     GPIO_Init(GPIOB, &GPIO_InitStructure);
 }
 
+// ---------------------------------------------------------------------------
+// Sets the bits of PORTB according to "data"
+// PORTB |= data
+// ---------------------------------------------------------------------------
+
 void gpio_set(unsigned int data) {
     GPIO_SetBits(GPIOB, data);
 }
+
+// ---------------------------------------------------------------------------
+// Clears the bits of PORTB according to "data"
+// PORTB &= ~data
+// ---------------------------------------------------------------------------
 
 void gpio_clear(unsigned int data) {
     GPIO_ResetBits(GPIOB, data);

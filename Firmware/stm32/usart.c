@@ -1,7 +1,16 @@
+// ---------------------------------------------------------------------------
+// This file contains the implementation of the functions that helps to
+// configure and utilize the USART controller.
+// ---------------------------------------------------------------------------
+
 #include <usart.h>
 #include <stm32f10x_usart.h>
 #include <stm32f10x_gpio.h>
 #include <stm32f10x_rcc.h>
+
+// ---------------------------------------------------------------------------
+// Initializes the USART controller using a baud rate value
+// ---------------------------------------------------------------------------
 
 int usart_init(unsigned int baudrate) {
     USART_InitTypeDef USART_InitStructure;
@@ -45,6 +54,10 @@ int usart_init(unsigned int baudrate) {
     return 0;
 }
 
+// ---------------------------------------------------------------------------
+// Sends a characher through USART.
+// ---------------------------------------------------------------------------
+
 int usart_send_char(char ch) {
     while(USART_GetFlagStatus(USART1, USART_FLAG_TC) == RESET);
     USART_SendData(USART1, ch);
@@ -61,6 +74,11 @@ int usart_send_char_non_blocking(char ch) {
     return 0;
 }
 
+// ---------------------------------------------------------------------------
+// Return with "true" if the USART is ready to send a message,
+// else returns with "false".
+// ---------------------------------------------------------------------------
+
 int usart_tx_ready() {
     if (USART_GetFlagStatus(USART1, USART_FLAG_TC) == RESET)
         return 0;
@@ -68,10 +86,19 @@ int usart_tx_ready() {
         return 1;
 }
 
+// ---------------------------------------------------------------------------
+// Receives a characher through USART.
+// ---------------------------------------------------------------------------
+
 char usart_recv_char() {
     while(USART_GetFlagStatus(USART1, USART_FLAG_RXNE) == RESET);
     return USART_ReceiveData(USART1);
 }
+
+// ---------------------------------------------------------------------------
+// Return with "true" if the USART is ready to receive a message,
+// else returns with "false".
+// ---------------------------------------------------------------------------
 
 int usart_rx_ready() {
     if (USART_GetFlagStatus(USART1, USART_FLAG_RXNE) == RESET)
@@ -79,6 +106,10 @@ int usart_rx_ready() {
     else
         return 1;
 }
+
+// ---------------------------------------------------------------------------
+// Sends a characher string through USART.
+// ---------------------------------------------------------------------------
 
 int usart_send_str(char *str) {
     unsigned int counter;
