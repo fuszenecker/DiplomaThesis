@@ -1,7 +1,8 @@
 #!/usr/bin/python
 
 # -----------------------------------------------------------------------------
-#
+# This program is the user interface of the Serial-CAN converter.
+# Python, PyTk and PySerial must be installed on the host computer.
 # -----------------------------------------------------------------------------
 
 import Tkinter
@@ -17,7 +18,8 @@ import time
 from time import *
 
 # -----------------------------------------------------------------------------
-#
+# Insert a new line into the LOG window. The inserted line will be the last
+# one in the window.
 # -----------------------------------------------------------------------------
 
 def log(line):
@@ -27,7 +29,9 @@ def log(line):
     text.see(END)
 
 # -----------------------------------------------------------------------------
-#
+# This routine will be called periodically by the TIMER module.
+# The function checks is there are characters waiting in the USART RX FIFO.
+# If there are, the characters will be inserted into the LOG window.
 # -----------------------------------------------------------------------------
 
 def print_tty():
@@ -41,7 +45,9 @@ def print_tty():
     timer.start()
 
 # -----------------------------------------------------------------------------
-#
+# This function is the callback function of the SET FILTER button.
+# It converts the ID value to integer, and sends the appropriate string to
+# the serial-CAN converter.
 # -----------------------------------------------------------------------------
 
 def set_filter_func():
@@ -56,7 +62,9 @@ def set_filter_func():
     tty.write("i%0X%s\n" % (filter, set_filter_id.get()))
 
 # -----------------------------------------------------------------------------
-#
+# This function is the callback function of the SET BAUDRATE button.
+# It converts the baudrate value to integer, and sends the appropriate string 
+# to the serial-CAN converter.
 # -----------------------------------------------------------------------------
 
 def set_baudrate_func():
@@ -68,7 +76,9 @@ def set_baudrate_func():
     tty.write("b %08X\n" % (baudrate))
 
 # -----------------------------------------------------------------------------
-#
+# This function is the callback function of the SEND MESSAGE button.
+# It converts the length value to integer, and sends the appropriate string 
+# to the serial-CAN converter.
 # -----------------------------------------------------------------------------
 
 def send_func():
@@ -80,7 +90,8 @@ def send_func():
     tty.write("s%01X%s%s\n" % (len, send_id.get(), send_data.get()))
 
 # -----------------------------------------------------------------------------
-#
+# This function is to "initialize" the converter. Really, it asks the 
+# version string.
 # -----------------------------------------------------------------------------
 
 def init_func():
@@ -90,7 +101,7 @@ def init_func():
     tty.write("v\n")
 
 # -----------------------------------------------------------------------------
-#
+# Main function of the program
 # -----------------------------------------------------------------------------
 
 def main():
@@ -159,7 +170,8 @@ def main():
     root.mainloop()
 
 # -----------------------------------------------------------------------------
-#
+# Open serial device and set initial parameters:
+# 115200 bit/sec, 8 bit length, no parity check, 1 stop bit.
 # -----------------------------------------------------------------------------
 
 tty = serial.Serial(
@@ -174,7 +186,7 @@ tty = serial.Serial(
     )
 
 # -----------------------------------------------------------------------------
-#
+# Start "main()" function...
 # -----------------------------------------------------------------------------
 
 main()
