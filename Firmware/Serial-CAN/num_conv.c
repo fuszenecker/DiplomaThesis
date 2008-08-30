@@ -1,4 +1,14 @@
+// ---------------------------------------------------------------------------
+// This file contains two routines that converts numeric values to
+// hexadecimal "strings" anv vica versa.
+// ---------------------------------------------------------------------------
+
 #include <num_conv.h>
+
+// ---------------------------------------------------------------------------
+// The function converts a characher (0123456789aAbBcCdDeEfF) to numeric 
+// value.
+// ---------------------------------------------------------------------------
 
 unsigned int hex_decode(char digit) {
     switch(digit) {
@@ -45,6 +55,12 @@ unsigned int hex_decode(char digit) {
     }
 }
 
+// ---------------------------------------------------------------------------
+// Converts hex string to numeric value:
+// 1st argument: pointer to the string
+// 2nd argument: the number of the digits to be processed
+// ---------------------------------------------------------------------------
+
 unsigned int hex2num(char *str, int digits) {
     int k;
     unsigned int value = 0;
@@ -56,6 +72,13 @@ unsigned int hex2num(char *str, int digits) {
 
     return value;
 }
+
+// ---------------------------------------------------------------------------
+// Converts numeric value to hex string:
+// 1st argument: the number itself
+// 2nd argument: pointer to the string
+// 3rd argument: the number of the digits to be "displayed"
+// ---------------------------------------------------------------------------
 
 const char xtab[] = "0123456789ABCDEF";
 
