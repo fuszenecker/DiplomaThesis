@@ -38,7 +38,7 @@ typedef struct {
 } t_queue;
 
 // ---------------------------------------------------------------------------
-// Function to initialize a queue
+// Function to initialize the queue
 // The parameter is the pointer to the queue
 // ---------------------------------------------------------------------------
 
