@@ -1,6 +1,10 @@
 #include <stm32f10x_lib.h>
 #include <config.h>
 
+// ---------------------------------------------------------------------------
+// This function enables the "main" (Quartz) oscillator
+// ---------------------------------------------------------------------------
+
 int clock_enable_main_osc() {
     ErrorStatus HSEStartUpStatus;
 
@@ -38,6 +42,11 @@ int clock_enable_main_osc() {
     return 1;
 }
 
+// ---------------------------------------------------------------------------
+// This function enables the PLL.
+// Input parameters are: PLL divisor, PLL multiplier
+// The CPU frequency is: f_quartz * PLL_multiplier / PLL_divisor
+// ---------------------------------------------------------------------------
 
 int __clock_enable_pll(unsigned int divisor, unsigned int multiplier) {
     FLASH_PrefetchBufferCmd(FLASH_PrefetchBuffer_Enable);
@@ -71,6 +80,11 @@ int __clock_enable_pll(unsigned int divisor, unsigned int multiplier) {
 
     return 0;
 }
+
+// ---------------------------------------------------------------------------
+// This function enables the PLL.
+// The CPU frequency is: f_quartz * PLL_multiplier / PLL_divisor
+// ---------------------------------------------------------------------------
 
 int clock_enable_pll() {
     __clock_enable_pll(PLL_DIV, PLL_MUL);
