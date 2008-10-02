@@ -117,14 +117,15 @@ int CAN_set_prescaler(unsigned int prescaler) {
 // ---------------------------------------------------------------------------
 // Sets the filter mask (Filter: the number if the filter to be used [0..13],
 // mask and ID are 29-bit values (0x00000000 ... 0x1fffffff), 
+// The MSB is the RTR bit.
 // ---------------------------------------------------------------------------
 
 void CAN_set_filter(unsigned int filter, unsigned int mask, unsigned int id) {
     CAN_FilterInitTypeDef CAN_FilterInitStructure;
 
-    unsigned int new_id = id << 3;
-    unsigned int new_mask = mask << 3;
-    
+    unsigned int new_id = (id << 3) | (id >> 30) | CAN_ID_EXT;
+    unsigned int new_mask = (mask << 3) | (mask >> 30) | CAN_ID_EXT;
+
     /* CAN filter init */
     CAN_FilterInitStructure.CAN_FilterNumber = filter;
     CAN_FilterInitStructure.CAN_FilterMode = CAN_FilterMode_IdMask;
@@ -144,13 +145,20 @@ void CAN_set_filter(unsigned int filter, unsigned int mask, unsigned int id) {
 // "data_h" and "data_l" are 32 bit values = 8 bytes of data.
 // ---------------------------------------------------------------------------
 
-int CAN_send(unsigned int id, unsigned int length, unsigned int data_h, unsigned int data_l) {
+int CAN_send(unsigned int id, unsigned int length, unsigned int data_h, 
+    unsigned int data_l, unsigned int rtr) {
+
     unsigned char TransmitMailbox;
     unsigned int retval = -1, i = 0;
 
     /* transmit */
     TxMessage.ExtId = id;
-    TxMessage.RTR = CAN_RTR_DATA;
+
+    if (rtr)
+        TxMessage.RTR = CAN_RTR_REMOTE;
+    else
+        TxMessage.RTR = CAN_RTR_DATA;
+
     TxMessage.IDE = CAN_ID_EXT;
     TxMessage.DLC = length;
     TxMessage.Data[0] = (data_h >> 24) & 0xff;
@@ -187,6 +195,7 @@ CanRxMsg *CAN_recv() {
     RxMessage.StdId = 0x00;
     RxMessage.IDE = CAN_ID_EXT;
     RxMessage.DLC = 0;
+    RxMessage.RTR = 0;
     RxMessage.Data[0] = 0x00;
     RxMessage.Data[1] = 0x00;
     RxMessage.Data[2] = 0x00;

@@ -23,6 +23,7 @@ int CAN_set_prescaler(unsigned int prescaler);
 // ---------------------------------------------------------------------------
 // Sets the filter mask (Filter: the number if the filter to be used [0..13],
 // mask and ID are 29-bit values (0x00000000 ... 0x1fffffff), 
+// the MSB is the RTR bit.
 // ---------------------------------------------------------------------------
 
 void CAN_set_filter(unsigned int filter, unsigned int mask, unsigned int id);
@@ -34,7 +35,7 @@ void CAN_set_filter(unsigned int filter, unsigned int mask, unsigned int id);
 // ---------------------------------------------------------------------------
 
 int CAN_send(unsigned int id, unsigned int length, unsigned int data_h, 
-    unsigned int dala_l);
+    unsigned int dala_l, unsigned int rtr);
 
 // ---------------------------------------------------------------------------
 // Gets the information from the CAN RX fifo. The return value is a 
