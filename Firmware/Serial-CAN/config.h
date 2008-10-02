@@ -48,7 +48,11 @@
 // ---------------------------------------------------------------------------
 
 #define CAN_BAUDRATE    25000
+
+#ifndef CAN_RETRIES
 #define CAN_RETRIES     16
+#endif
+
 #define USART_BAUDRATE  115200
 
 #endif
