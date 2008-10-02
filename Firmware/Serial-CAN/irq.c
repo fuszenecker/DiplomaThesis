@@ -124,44 +124,61 @@ void usart_rx_handler() {
                 case 'f':
                 case 'F':
                     // Set filter mask
-                    // Format: Fnxxxxxxxx
+                    // Format: Fnxxxxxxxxr or Fnxxxxxxxxd
                     // where 'xxxxxxxx' is the mask in hexadecimal format
+                    // 'r' is the RTR bit (can be: "r", "R" or empty)
+                    // 'd' is the DATA bit (can be: "d", "D" or empty)
                     // 'n' is the filter's number (0 ... 13) in hexadecimal
                     msg.command = CAN_SET_FILTER;
                     msg.param1 = hex2num((char *) line+1, 1);
                     msg.param2 = hex2num((char *) line+2, 8);
+
+                    if ((line[10] == 'r') || (line[10] == 'R'))
+                        msg.param2 |= 0x80000000;
+
                     msg.param3 = 0;
+
                     break;
 
                 case 'i':
                 case 'I':
                     // Set CAN id
-                    // Format: Inxxxxxxxx
+                    // Format: Inxxxxxxxxr or Inxxxxxxxxd
                     // where 'xxxxxxxx' is the ID value in hexadecimal
+                    // 'r' is the RTR bit (can be: "r", "R" or empty)
+                    // 'd' is the DATA bit (can be: "d", "D" or empty)
                     // 'n' is the filter's number (0 ... 13) in hexadecimal
                     msg.command = CAN_SET_ID;
                     msg.param1 = hex2num((char *) line+1, 1);
                     msg.param2 = hex2num((char *) line+2, 8);
+
+                    if ((line[10] == 'r') || (line[10] == 'R'))
+                        msg.param2 |= 0x80000000;
+
                     msg.param3 = 0;
+
                     break;
 
                 case 's':
                 case 'S':
                     // Send CAN frame
-                    // Format: Sniiiiiiiidddddddddddddddd
+                    // Format: Sniiiiiiiivvvvvvvvvvvvvvvvr
+                    //      or Sniiiiiiiivvvvvvvvvvvvvvvvd
                     // where 'n' is the number of bytes to be sent (1 ... 8)
                     //      it is not possible to send 0 byte of data!
-                    // "iiiiiiii" is the destination id in HEXADECIMAL
-                    // "dd ... dd" is the data. 16 digits (8 bytes) expected.
-                    msg.command = CAN_SEND;
+                    // 'iiiiiiii' is the destination id in HEXADECIMAL
+                    // 'vv ... vv' is the data. 16 digits (8 bytes) expected.
+                    // 'r' the RTR bit (can be: "r", "R" or empty)
+                    // 'd' is the DATA bit (can be: "d", "D" or empty)
+                    msg.command = CAN_SEND | (hex2num((char *) line+1, 1) << 16);
 
-                    if (line[1] == '0')
-                        line[1] = '1';
-
-                    msg.param1 = (hex2num((char *) line+1, 1) - 1) << 29 | 
-                                  (hex2num((char *) line+2, 8) & 0x1fffffff);
+                    msg.param1 = hex2num((char *) line+2, 8) & 0x1fffffff;
                     msg.param2 = hex2num((char *) line+10, 8);
                     msg.param3 = hex2num((char *) line+18, 8);
+
+                    if ((line[26] == 'r') || (line[26] == 'R'))
+                        msg.param1 |= 0x80000000;
+
                     break;
 
                 default:
@@ -220,14 +237,9 @@ void CAN_rx_handler() {
 
     // If it is in the acceptable format (with 29 bit addresses)...
     if (RxMessage.IDE == CAN_ID_EXT) {
-        // At least one byte of data has to be received (and sent!)
-        if (RxMessage.DLC == 0) {
-            RxMessage.DLC = 1;
-        }
-
         // Preparing the massage to be sent to "main()" function
-        msg.command = 0;
-        msg.param1 = RxMessage.ExtId | (RxMessage.DLC - 1) << 29;
+        msg.command = RxMessage.DLC;
+        msg.param1 = RxMessage.ExtId;
         msg.param2 = (RxMessage.Data[0] << 24) | (RxMessage.Data[1] << 16) |
                      (RxMessage.Data[2] << 8) | RxMessage.Data[3];
         msg.param3 = (RxMessage.Data[4] << 24) | (RxMessage.Data[5] << 16) |

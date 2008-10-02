@@ -49,7 +49,7 @@ int main() {
         // Is there a new message in the USART->CAN queue?
         // The message arrives from the USART ISR.
         if (queue_get_non_blocking((t_queue *) &usart2can, &pmsg) == QUEUE_OK) {
-            switch (pmsg->command) {
+            switch (pmsg->command & 0xffff) {
                 case CAN_VERSION:
                     // Get version information:
                     // A text message will be sent: 
@@ -95,7 +95,7 @@ int main() {
                     // The filter identifier must be less than 14!
                     if ((pmsg->param1 < 14) && (pmsg->param1 >= 0)) {
                         // Save mask value to the array defined above
-                        can_filter[pmsg->param1] = pmsg->param2 & 0x1fffffff;
+                        can_filter[pmsg->param1] = pmsg->param2 & 0x9fffffff;
                         // Set filter according to the saved value
                         CAN_set_filter(pmsg->param1, can_filter[pmsg->param1],
                             can_id[pmsg->param1]);
@@ -113,6 +113,10 @@ int main() {
                         usart_send_str(", Id: 0x");
                         num2hex(can_id[pmsg->param1], str, 8);
                         usart_send_str(str);
+
+                        if (can_filter[pmsg->param1] & 0x80000000)
+                            usart_send_str(" RTR");
+
                     } else {
                         // if the filter ID >= 14 or ID < 0, then an
                         // error message should be sent
@@ -126,7 +130,7 @@ int main() {
                     // The filter identifier must be less than 14!
                     if ((pmsg->param1 < 14) && (pmsg->param1 >= 0)) {
                         // Save filter ID value to the array defined above
-                        can_id[pmsg->param1] = pmsg->param2 & 0x1fffffff;
+                        can_id[pmsg->param1] = pmsg->param2 & 0x9fffffff;
                         // Set filter according to the saved value
                         CAN_set_filter(0, can_filter[pmsg->param1], can_id[pmsg->param1]);
 
@@ -143,6 +147,10 @@ int main() {
                         usart_send_str(", Id: 0x");
                         num2hex(can_id[pmsg->param1], str, 8);
                         usart_send_str(str);
+
+                        if (can_filter[pmsg->param1] & 0x80000000)
+                            usart_send_str(" RTR");
+
                     } else {
                         // if the filter ID >= 14 or ID < 0, then an
                         // error message should be sent
@@ -155,8 +163,9 @@ int main() {
                     // Send message through CAN bus:
                     // Try to send the message, on success...
                     if (CAN_send(pmsg->param1 & 0x1fffffff, 
-                                 (pmsg->param1 >> 29) + 1, 
-                                 pmsg->param2, pmsg->param3) == CANTXOK) {
+                                 pmsg->command >> 16, 
+                                 pmsg->param2, pmsg->param3,
+                                 pmsg->param1 & 0x80000000) == CANTXOK) {
                         // ... a positive acknowledge is sent ...
                         usart_send_str("+ Message successfully sent.");
                     } else {
@@ -207,6 +216,10 @@ int main() {
             usart_send_str(str);
             num2hex(pmsg->param3, str, 8);
             usart_send_str(str);
+
+            // Remote frame?
+            if (pmsg->command)
+                usart_send_str(" RTR");
 
             // The string will be terminated as described above.
             if (cr_needed)
