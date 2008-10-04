@@ -9,7 +9,7 @@
 // Device version string
 // ---------------------------------------------------------------------------
 
-#define DEV_VERSION     "Fuszenecker's serial-CAN converter, release II."
+#define DEV_VERSION     "Fuszenecker's serial-CAN converter, release III."
 
 // ---------------------------------------------------------------------------
 // The size of the main stack located at the end of the RAM area

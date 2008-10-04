@@ -18,6 +18,12 @@ import time
 from time import *
 
 # -----------------------------------------------------------------------------
+# The USART baudrate used during the communication.
+# -----------------------------------------------------------------------------
+
+usart_baudrate = 115200
+
+# -----------------------------------------------------------------------------
 # Insert a new line into the LOG window. The inserted line will be the last
 # one in the window.
 # -----------------------------------------------------------------------------
@@ -172,6 +178,7 @@ def main():
 # -----------------------------------------------------------------------------
 # Open serial device and set initial parameters:
 # 115200 bit/sec, 8 bit length, no parity check, 1 stop bit.
+# Then sets the USART baud rate that will be used during the communication.
 # -----------------------------------------------------------------------------
 
 tty = serial.Serial(
@@ -179,10 +186,25 @@ tty = serial.Serial(
         parity = serial.PARITY_NONE,
         bytesize = serial.EIGHTBITS,
         stopbits = serial.STOPBITS_ONE, 
-        timeout = 3,
+        timeout = 1,
         xonxoff = 0,
         rtscts = 0,
-        baudrate=115200
+        baudrate = 115200
+    )
+
+tty.write("u %08X\n" % (usart_baudrate))
+
+tty.close()
+
+tty = serial.Serial(
+        port = "/dev/ttyS0", 
+        parity = serial.PARITY_NONE,
+        bytesize = serial.EIGHTBITS,
+        stopbits = serial.STOPBITS_ONE, 
+        timeout = 1,
+        xonxoff = 0,
+        rtscts = 0,
+        baudrate = usart_baudrate
     )
 
 # -----------------------------------------------------------------------------

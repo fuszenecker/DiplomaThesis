@@ -26,6 +26,7 @@ volatile t_queue can2usart;
 // ---------------------------------------------------------------------------
 
 volatile unsigned int can_baudrate;
+volatile unsigned int usart_baudrate = USART_BAUDRATE;
 extern const unsigned int f_cpu;                      // Frequency of CPU clock
 volatile unsigned int can_filter[14], can_id[14];
 
@@ -50,6 +51,21 @@ int main() {
         // The message arrives from the USART ISR.
         if (queue_get_non_blocking((t_queue *) &usart2can, &pmsg) == QUEUE_OK) {
             switch (pmsg->command & 0xffff) {
+                case USART_SET_BAUD:
+                    // Predefined baud rate shall be changed
+                    usart_baudrate = pmsg->param1;
+                    // Set the BAUD rate
+                    usart_init(usart_baudrate);
+
+                    // Human-readable string...
+                    usart_send_str("+ USART Baud rate: 0x");
+                    // + the numeric of baud rate converted to hexadecimal format
+                    num2hex(usart_baudrate, str, 8);
+                    // Send hexadecinal "string"
+                    usart_send_str(str);
+
+                    break;
+
                 case CAN_VERSION:
                     // Get version information:
                     // A text message will be sent: 
@@ -73,13 +89,13 @@ int main() {
                     break;
 
                 case CAN_SET_BAUD:
-                    // Predefined baud tare shall be changed
+                    // Predefined baud rate shall be changed
                     can_baudrate = pmsg->param1;
                     // See equation above
                     CAN_set_prescaler(f_cpu / 32 / can_baudrate - 1);
 
                     // Human-readable string...
-                    usart_send_str("+ Baud rate: 0x");
+                    usart_send_str("+ CAN Baud rate: 0x");
                     // + the numeric of baud rate converted to hexadecimal format
                     num2hex(can_baudrate, str, 8);
                     // Send hexadecinal "string"
@@ -207,7 +223,7 @@ int main() {
 
             // ... length ...
             usart_send_str(", length: ");
-            num2hex((pmsg->param1 >> 29) + 1, str, 8);
+            num2hex(pmsg->command & 0xffff, str, 8);
             usart_send_str(str);
 
             // ... and data field.
@@ -218,7 +234,7 @@ int main() {
             usart_send_str(str);
 
             // Remote frame?
-            if (pmsg->command)
+            if (pmsg->command >> 16)
                 usart_send_str(" RTR");
 
             // The string will be terminated as described above.

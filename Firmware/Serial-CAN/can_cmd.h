@@ -13,6 +13,7 @@
 #define CAN_SET_ID      4
 #define CAN_SEND        5
 #define CAN_RECV        6
+#define USART_SET_BAUD  7
 #define CAN_UNKNOWN     -1
 
 #endif

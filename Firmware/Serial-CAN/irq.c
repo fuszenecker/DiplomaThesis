@@ -110,9 +110,20 @@ void usart_rx_handler() {
                     break;
                 --------------------------------------------------------------
 */
+                case 'u':
+                case 'U':
+                    // Set USART baud rate
+                    // Format: U_xxxxxxxx
+                    // where 'x' is a hexadecimal digit
+                    // and '_' is "don't care"
+                    msg.command = USART_SET_BAUD;
+                    msg.param1 = hex2num((char *) line+2, 8);
+                    msg.param2 = msg.param3 = 0;
+                    break;
+
                 case 'b':
                 case 'B':
-                    // Set baud rate
+                    // Set CAN baud rate
                     // Format: B_xxxxxxxx
                     // where 'x' is a hexadecimal digit
                     // and '_' is "don't care"
@@ -238,7 +249,7 @@ void CAN_rx_handler() {
     // If it is in the acceptable format (with 29 bit addresses)...
     if (RxMessage.IDE == CAN_ID_EXT) {
         // Preparing the massage to be sent to "main()" function
-        msg.command = RxMessage.DLC;
+        msg.command = RxMessage.DLC | (RxMessage.RTR << 16);
         msg.param1 = RxMessage.ExtId;
         msg.param2 = (RxMessage.Data[0] << 24) | (RxMessage.Data[1] << 16) |
                      (RxMessage.Data[2] << 8) | RxMessage.Data[3];
