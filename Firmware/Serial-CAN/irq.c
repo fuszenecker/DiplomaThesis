@@ -99,17 +99,14 @@ void usart_rx_handler() {
                     msg.param1 = msg.param2 = msg.param3 = 0;
                     break;
 
-/*              
-                ---- REMOVED FROM THE STABLE RELEASE -------------------------
-                case 'r':
-                case 'R':
-                    // Initialize CAN
-                    // One character expected
-                    msg.command = CAN_INIT;
+                case 'm':
+                case 'M':
+                    // Get free memory
+                    // Format: M
+                    msg.command = GET_FREE_MEM;
                     msg.param1 = msg.param2 = msg.param3 = 0;
                     break;
-                --------------------------------------------------------------
-*/
+
                 case 'u':
                 case 'U':
                     // Set USART baud rate
@@ -207,6 +204,7 @@ void usart_rx_handler() {
             gpio_clear(LED_USART);
             // Line is to be invalidated
             line_len = 0;
+            line[0] = 0;
             return;
         } else {
             // If one more character can be attached to the string 

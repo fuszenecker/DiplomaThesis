@@ -21,7 +21,7 @@ from time import *
 # The USART baudrate used during the communication.
 # -----------------------------------------------------------------------------
 
-usart_baudrate = 115200
+usart_baudrate = 1200
 
 # -----------------------------------------------------------------------------
 # Insert a new line into the LOG window. The inserted line will be the last
@@ -189,7 +189,7 @@ tty = serial.Serial(
         timeout = 1,
         xonxoff = 0,
         rtscts = 0,
-        baudrate = 115200
+        baudrate = 1200
     )
 
 tty.write("u %08X\n" % (usart_baudrate))

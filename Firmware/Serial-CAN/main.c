@@ -31,6 +31,12 @@ extern const unsigned int f_cpu;                      // Frequency of CPU clock
 volatile unsigned int can_filter[14], can_id[14];
 
 // ---------------------------------------------------------------------------
+// The get_free_mem() function determines the free memory (RAM).
+// ---------------------------------------------------------------------------
+
+unsigned int get_free_mem();
+
+// ---------------------------------------------------------------------------
 // The "main()" function is started by the "sysinit()" routine.
 // The "sysinit()" is the function that is started when the MCU starts.
 // ---------------------------------------------------------------------------
@@ -38,6 +44,9 @@ volatile unsigned int can_filter[14], can_id[14];
 int main() {
     // A string to store text message to the "upper" CPU or user
     char str[MAX_STR_LEN];
+
+    // The amount of the free RAM
+    unsigned int free_mem = 1;
 
     // Pointer to a message in the message queue
     t_message *pmsg;
@@ -63,6 +72,7 @@ int main() {
                     num2hex(usart_baudrate, str, 8);
                     // Send hexadecinal "string"
                     usart_send_str(str);
+                    usart_send_str(".");
 
                     break;
 
@@ -75,17 +85,23 @@ int main() {
                     usart_send_str(DEV_VERSION);
                     break;
 
-                case CAN_INIT:
-                    // bitrate = 1/(tq * 16)
-                    // tq = 1/(f_cpu / 2) * (BRD+1) = 2/f_cpu * (BRD+1)
-                    // bitrate = 1 / [2/f_cpu * 16 * (BRD+1)] = 
-                    //     = f_cpu / [32 * (BRD+1)]
-                    // BRD+1 = f_cpu / 32 / bitrate
-                    // BRD = f_cpu / 32 / bitrate - 1
-                    CAN_set_prescaler(f_cpu / 32 / can_baudrate - 1);
-                    usart_send_str("+ Successfully initialized.");
-                    // Filter that makes the CAN MAC accepts all messages
-                    CAN_set_filter(0, 0, 0);
+                case GET_FREE_MEM:
+                    // Get free memory
+                    usart_send_str("+ Free memory: 0x");
+                    // Convert the number to hexadecimal format
+                    free_mem = get_free_mem();
+                    num2hex(free_mem, str, 8);
+                    // Print the amount of free memory
+                    usart_send_str(str);
+
+                    // Memory in use
+                    usart_send_str(" bytes, memory in use: 0x");
+                    // Convert the number to hexadecimal format
+                    num2hex(RAM_SIZE - free_mem, str, 8);
+                    // Print the amount of used memory
+                    usart_send_str(str);
+                    usart_send_str(" bytes.");
+
                     break;
 
                 case CAN_SET_BAUD:
@@ -104,6 +120,7 @@ int main() {
                     usart_send_str(", divisor: 0x");
                     num2hex(f_cpu / 32 / can_baudrate - 1, str, 8);
                     usart_send_str(str);
+                    usart_send_str(".");
                     break;
 
                 case CAN_SET_FILTER:
@@ -131,8 +148,9 @@ int main() {
                         usart_send_str(str);
 
                         if (can_filter[pmsg->param1] & 0x80000000)
-                            usart_send_str(" RTR");
+                            usart_send_str(", RTR");
 
+                        usart_send_str(".");
                     } else {
                         // if the filter ID >= 14 or ID < 0, then an
                         // error message should be sent
@@ -165,8 +183,9 @@ int main() {
                         usart_send_str(str);
 
                         if (can_filter[pmsg->param1] & 0x80000000)
-                            usart_send_str(" RTR");
+                            usart_send_str(", RTR");
 
+                        usart_send_str(".");
                     } else {
                         // if the filter ID >= 14 or ID < 0, then an
                         // error message should be sent
@@ -192,12 +211,10 @@ int main() {
 
                 case CAN_UNKNOWN:
                     // When an unknown CAN message arrives, a warning should appear
-                    usart_send_str("- Unknown message arrived.");
+                    usart_send_str("- Invalid command.");
                     break;
 
                 default:
-                    // This is the message that will not be seen (hopefully).
-                    usart_send_str("- Internal error! Stop using this device!");
                     break;
             }
 
@@ -235,7 +252,9 @@ int main() {
 
             // Remote frame?
             if (pmsg->command >> 16)
-                usart_send_str(" RTR");
+                usart_send_str(", RTR");
+
+            usart_send_str(".");
 
             // The string will be terminated as described above.
             if (cr_needed)
@@ -248,5 +267,25 @@ int main() {
             queue_remove((t_queue *) &can2usart);
         }
     } /* while (1) ... */
+}
+
+// ---------------------------------------------------------------------------
+// The get_free_mem() function determines the free memory (RAM).
+// ---------------------------------------------------------------------------
+
+unsigned int get_free_mem() {
+    unsigned char *p = (unsigned char *) RAM_BASE;
+    unsigned int i, flag, free = 0;
+
+    for (; p < ((unsigned char *) RAM_BASE + RAM_SIZE); p += PAGE_SIZE) {
+        for (flag = 1, i = 0; i < PAGE_SIZE; i++)
+            if (p[i] != 0)
+                flag = 0;
+
+        if (flag)
+            free++;
+    }
+
+    return free * PAGE_SIZE;
 }
 

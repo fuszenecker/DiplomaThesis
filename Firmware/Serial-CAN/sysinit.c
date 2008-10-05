@@ -74,6 +74,13 @@ void sysinit() {
     // Structure to configure Interrupt Controller
     NVIC_InitTypeDef NVIC_InitStructure;
 
+    // Clean RAM area
+    unsigned char *p;
+    
+    for (p = (unsigned char *) RAM_BASE; 
+            p < ((unsigned char *) RAM_BASE + RAM_SIZE); p++)
+        *p = 0;
+    
     // Enable main (Quartz) oscillator
     clock_enable_main_osc();
     // Enable PLL: see also PLL_MUL and PLL_DIV constants

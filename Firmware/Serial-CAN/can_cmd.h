@@ -14,6 +14,7 @@
 #define CAN_SEND        5
 #define CAN_RECV        6
 #define USART_SET_BAUD  7
+#define GET_FREE_MEM    8
 #define CAN_UNKNOWN     -1
 
 #endif

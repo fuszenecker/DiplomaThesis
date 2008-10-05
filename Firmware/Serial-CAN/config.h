@@ -9,7 +9,7 @@
 // Device version string
 // ---------------------------------------------------------------------------
 
-#define DEV_VERSION     "Fuszenecker's serial-CAN converter, release III."
+#define DEV_VERSION     "Fuszenecker's serial-CAN converter, Release IV."
 
 // ---------------------------------------------------------------------------
 // The size of the main stack located at the end of the RAM area
@@ -38,6 +38,7 @@
 #ifdef STM32
 #define RAM_BASE        0x20000000
 #define RAM_SIZE        (8 K)
+#define PAGE_SIZE       256
 #endif
 
 #define MAIN_STACK      (RAM_BASE + RAM_SIZE)
@@ -53,6 +54,6 @@
 #define CAN_RETRIES     16
 #endif
 
-#define USART_BAUDRATE  115200
+#define USART_BAUDRATE  1200
 
 #endif
