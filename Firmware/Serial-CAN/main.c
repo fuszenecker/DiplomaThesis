@@ -22,12 +22,12 @@ volatile t_queue usart2can;
 volatile t_queue can2usart;
 
 // ---------------------------------------------------------------------------
-// These variables contain the CAN baudrate and the filter/mask serrings.
+// These variables contain the CAN baudrate and the filter/mask settings.
 // ---------------------------------------------------------------------------
 
 volatile unsigned int can_baudrate;
 volatile unsigned int usart_baudrate = USART_BAUDRATE;
-extern const unsigned int f_cpu;                      // Frequency of CPU clock
+extern const unsigned int f_cpu;    // Frequency of CPU clock
 volatile unsigned int can_filter[14], can_id[14];
 
 // ---------------------------------------------------------------------------

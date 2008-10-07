@@ -74,7 +74,7 @@ void usart_rx_handler() {
 
     // If a new character is received
     if (USART_GetITStatus(USART1, USART_IT_RXNE) != RESET) {
-        // Switch on "Receiging..." LED
+        // Switch on "Receiving..." LED
         gpio_set(LED_USART);
 
         // Read the character from the USART FIFO
@@ -246,7 +246,7 @@ void CAN_rx_handler() {
 
     // If it is in the acceptable format (with 29 bit addresses)...
     if (RxMessage.IDE == CAN_ID_EXT) {
-        // Preparing the massage to be sent to "main()" function
+        // Preparing the message to be sent to "main()" function
         msg.command = RxMessage.DLC | (RxMessage.RTR << 16);
         msg.param1 = RxMessage.ExtId;
         msg.param2 = (RxMessage.Data[0] << 24) | (RxMessage.Data[1] << 16) |
