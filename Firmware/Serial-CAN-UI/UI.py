@@ -182,7 +182,8 @@ def main():
 # -----------------------------------------------------------------------------
 
 tty = serial.Serial(
-        port = "/dev/ttyS0", 
+#        port = "/dev/ttyS0", 
+        port = 0, 
         parity = serial.PARITY_NONE,
         bytesize = serial.EIGHTBITS,
         stopbits = serial.STOPBITS_ONE, 
@@ -197,7 +198,8 @@ tty.write("u %08X\n" % (usart_baudrate))
 tty.close()
 
 tty = serial.Serial(
-        port = "/dev/ttyS0", 
+#        port = "/dev/ttyS0", 
+        port = 0,
         parity = serial.PARITY_NONE,
         bytesize = serial.EIGHTBITS,
         stopbits = serial.STOPBITS_ONE, 

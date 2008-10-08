@@ -240,7 +240,7 @@ int main() {
 
             // ... length ...
             usart_send_str(", length: ");
-            num2hex(pmsg->command & 0xffff, str, 8);
+            num2hex(pmsg->command & 0xffff, str, 1);
             usart_send_str(str);
 
             // ... and data field.
