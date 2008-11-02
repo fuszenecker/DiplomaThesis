@@ -13,7 +13,7 @@
 // ---------------------------------------------------------------------------
 
 int systick_init(unsigned int freq) {
-    SysTick_SetReload(CLOCK_FREQ * PLL_MUL / PLL_DIV / 8 / freq * 1024);
+    SysTick_SetReload(CLOCK_FREQ * PLL_FACTOR / freq / 8);
     SysTick_ITConfig(ENABLE);
     SysTick_CounterCmd(SysTick_Counter_Enable);
     

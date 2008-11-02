@@ -20,7 +20,7 @@
 #ifdef STM32
 #define PLL_DIV         RCC_PLLSource_HSE_Div1
 #define PLL_MUL         RCC_PLLMul_12
-#define PLL_FACTOR      6
+#define PLL_FACTOR      12
 #endif
 
 // ---------------------------------------------------------------------------
@@ -38,6 +38,6 @@
 // 
 // ---------------------------------------------------------------------------
 
-#define PWM_PERIOD      2000
+#define PWM_PERIOD      4000
 
 #endif

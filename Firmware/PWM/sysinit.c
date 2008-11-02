@@ -71,15 +71,16 @@ void sysinit() {
     clock_enable_pll();
 
     // Low level initialization of the GPIO ports
-    gpio_init();
+    // gpio_init();
+    gpioa_init();
 
     // Initialization of the Systick Timer
     // Parameter: period time: 1/n sec, where "n" is the parameter
-    systick_init(4);
+    systick_init(25000);
 
     // Initialization of the Systick Timer
     // Parameter: period time: 1/n sec, where "n" is the parameter
-    pwm_init(0, 0, PWM_PERIOD);
+    // pwm_init(0, 0, PWM_PERIOD);
 
     // Finally, the main function will be started
     while (1)

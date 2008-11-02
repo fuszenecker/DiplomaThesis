@@ -11,6 +11,7 @@
 // ---------------------------------------------------------------------------
 
 void gpio_init();
+void gpioa_init();
 
 // ---------------------------------------------------------------------------
 // Sets the bits of PORTB according to "data"
@@ -18,6 +19,7 @@ void gpio_init();
 // ---------------------------------------------------------------------------
 
 void gpio_set(unsigned int data);
+void gpioa_set(unsigned int data);
 
 // ---------------------------------------------------------------------------
 // Clears the bits of PORTB according to "data"
@@ -25,5 +27,6 @@ void gpio_set(unsigned int data);
 // ---------------------------------------------------------------------------
 
 void gpio_clear(unsigned int data);
+void gpioa_clear(unsigned int data);
 
 #endif
