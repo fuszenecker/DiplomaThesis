@@ -37,7 +37,7 @@ void inline delay() {
 
 void systick() {
     gpioa_clear(PWM_OUT0); delay(); gpioa_set(PWM_OUT0);
-    gpioa_clear(PWM_OUT1); delay(); gpioa_set(PWM_OUT1);
+    gpioa_clear(PWM_OUT1); delay(); gpioa_clear(PWM_OUT1);
     gpioa_clear(PWM_OUT1); delay(); gpioa_set(PWM_OUT1);
     gpioa_clear(PWM_OUT0); delay(); gpioa_set(PWM_OUT0);
 }
