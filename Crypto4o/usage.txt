@@ -1,0 +1,29 @@
+Compile:
+
+    $ make
+    $ make install
+
+
+Usage:
+ 
+    Polynom representation: x^4 + x^3 + 1 = 11001_bin = 0x19
+
+    $ crypto4o <input_file> <output_file> <data_polynom> <data_initi_value> <control_polynom> <control_init_value>
+    $ crypto4o.py <input_file> <output_file> <data_polynom> <data_initi_value> <control_polynom> <control_init_value>
+
+    Example:
+
+    $ crypto4o data.txt data_encrypted.c4o 0x19 0x1 0x20081111 0x55aa00ff
+    $ crypto4o data_encrypted.c4o data_decrypted.txt 0x19 0x1 0x20081111 0x55aa00ff
+
+    Random number generation:
+
+    $ crypto4o /dev/zero /dev/stdout 0x1010001155aa00ff 0x55 0xdeadbeef 0xBeefbeeF
+
+
+Source of secure polynoms:
+
+    http://www.physics.otago.ac.nz/px/research/electronics/papers/technical-reports/lfsr_table.pdf
+    http://homepage.mac.com/afj/taplist.html
+    http://www.xilinx.com/support/documentation/application_notes/xapp052.pdf
+

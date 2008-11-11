@@ -73,17 +73,17 @@ int main(int argc, char **argv) {
     }
 
     if ((argv[4][0] != '0') || ((argv[4][1] | 0x20) != 'x')) {
-        fprintf(stderr, "Argument 4 is not in hexadecimal format (%s).\n", argv[3]);
+        fprintf(stderr, "Argument 4 is not in hexadecimal format (%s).\n", argv[4]);
         exit(2);
     }
 
     if ((argv[5][0] != '0') || ((argv[5][1] | 0x20) != 'x')) {
-        fprintf(stderr, "Argument 5 is not in hexadecimal format (%s).\n", argv[3]);
+        fprintf(stderr, "Argument 5 is not in hexadecimal format (%s).\n", argv[5]);
         exit(2);
     }
 
     if ((argv[6][0] != '0') || ((argv[6][1] | 0x20) != 'x')) {
-        fprintf(stderr, "Argument 6 is not in hexadecimal format (%s).\n", argv[3]);
+        fprintf(stderr, "Argument 6 is not in hexadecimal format (%s).\n", argv[6]);
         exit(2);
     }
 
