@@ -10,8 +10,9 @@
 #include <clock.h>
 #include <pwm.h>
 
-extern const unsigned int f_cpu;                      // Frequency of CPU clock
-volatile unsigned int pwm_duty_cycle;                          // Frequency of CPU clock
+extern const unsigned int f_cpu;        // Frequency of CPU clock
+volatile unsigned int pwm_duty_cycle;   // Frequency of CPU clock
+volatile unsigned int adc_value;        // Current value of the analog input
 
 #define N   500000
 
@@ -45,6 +46,9 @@ int main() {
         for (g = 0; g < N; g++) 
             asm ("nop");
         */
+
+        // Do the ADC conversion (result: lower 12 bit)
+        adc_value = adc_convert();
     }
 }
 

@@ -8,6 +8,7 @@
 
 #include <clock.h>
 #include <gpio.h>
+#include <adc.h>
 #include <systick.h>
 #include <irq.h>
 
@@ -73,6 +74,9 @@ void sysinit() {
     // Low level initialization of the GPIO ports
     // gpio_init();
     gpioa_init();
+
+    // Low level initialization of the Analog-Digital Converter
+    adc_init();
 
     // Initialization of the Systick Timer
     // Parameter: period time: 1/n sec, where "n" is the parameter

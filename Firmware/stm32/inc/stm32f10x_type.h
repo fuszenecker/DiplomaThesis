@@ -1,8 +1,8 @@
 /******************** (C) COPYRIGHT 2008 STMicroelectronics ********************
 * File Name          : stm32f10x_type.h
 * Author             : MCD Application Team
-* Version            : V2.0.1
-* Date               : 06/13/2008
+* Version            : V2.0.3
+* Date               : 09/22/2008
 * Description        : This file contains all the common data types used for the
 *                      STM32F10x firmware library.
 ********************************************************************************
@@ -52,9 +52,7 @@ typedef volatile unsigned long  const vuc32;  /* Read Only */
 typedef volatile unsigned short const vuc16;  /* Read Only */
 typedef volatile unsigned char  const vuc8;   /* Read Only */
 
-#ifndef __cplusplus
 typedef enum {FALSE = 0, TRUE = !FALSE} bool;
-#endif
 
 typedef enum {RESET = 0, SET = !RESET} FlagStatus, ITStatus;
 

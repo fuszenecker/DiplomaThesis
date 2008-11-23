@@ -1,8 +1,8 @@
 /******************** (C) COPYRIGHT 2008 STMicroelectronics ********************
 * File Name          : stm32f10x_nvic.c
 * Author             : MCD Application Team
-* Version            : V2.0.1
-* Date               : 06/13/2008
+* Version            : V2.0.3
+* Date               : 09/22/2008
 * Description        : This file provides all the NVIC firmware functions.
 ********************************************************************************
 * THE PRESENT FIRMWARE WHICH IS FOR GUIDANCE ONLY AIMS AT PROVIDING CUSTOMERS
@@ -236,7 +236,7 @@ void NVIC_BASEPRICONFIG(u32 NewPriority)
   /* Check the parameters */
   assert_param(IS_NVIC_BASE_PRI(NewPriority));
   
-  __BASEPRICONFIG((unsigned int)(NewPriority << 0x04));
+  __BASEPRICONFIG(NewPriority << 0x04);
 }
 
 /*******************************************************************************

@@ -9,7 +9,7 @@ CROSS		= arm-none-linux-gnueabi-
 CC			= $(CROSS)gcc
 CXX			= $(CROSS)g++
 AS			= $(CC)
-OPT			= 2
+OPT			= 0
 FWLIB		= ../stm32/src
 DRIVERS		= ../stm32
 CFLAGS		= -mthumb -mcpu=cortex-m3 -Wall -O$(OPT) -g -DSTM32
@@ -21,7 +21,7 @@ LDFLAGS		= -T stm32.ld
 OBJDUMP		= $(CROSS)objdump
 ODFLAGS		= -h -j .stack_pointer -j .vectors -j .text -j .data -j .bss -dS 
 OBJCOPY		= $(CROSS)objcopy
-OCFLAGS		= -O binary -j .stack_pointer -j .vectors -j .text -j .data -j .bss
+OCFLAGS		= -j .stack_pointer -j .vectors -j .text -j .data -j .bss -O
 NM			= $(CROSS)nm
 
 # ----------------------------------------------------------------------------
@@ -45,7 +45,7 @@ OBJS		= sysinit.o main.o irq.o
 # ------------
 
 OBJS		+= $(DRIVERS)/clock.o $(DRIVERS)/systick.o $(DRIVERS)/gpio.o
-OBJS		+= $(DRIVERS)/pwm.o
+OBJS		+= $(DRIVERS)/pwm.o $(DRIVERS)/adc.o $(DRIVERS)/can.o
 
 # -------------------------
 # Software library modules:
@@ -53,7 +53,8 @@ OBJS		+= $(DRIVERS)/pwm.o
 
 OBJS		+= $(FWLIB)/stm32f10x_rcc.o $(FWLIB)/stm32f10x_flash.o
 OBJS		+= $(FWLIB)/stm32f10x_systick.o $(FWLIB)/stm32f10x_gpio.o
-OBJS		+= $(FWLIB)/stm32f10x_tim.o
+OBJS		+= $(FWLIB)/stm32f10x_tim.o $(FWLIB)/stm32f10x_adc.o
+OBJS		+= $(FWLIB)/stm32f10x_can.o
 
 # ----------------------------------------------------------------------------
 # Compile the firmware
@@ -62,7 +63,8 @@ OBJS		+= $(FWLIB)/stm32f10x_tim.o
 all: clean $(OBJS)
 	$(LD) $(LDFLAGS) -o $(PROG) $(OBJS) $(EXT_LIBS)
 	$(OBJDUMP) $(ODFLAGS) $(PROG) > $(PROG).list 
-	$(OBJCOPY) $(OCFLAGS) $(PROG) $(PROG).bin
+	$(OBJCOPY) $(OCFLAGS) binary $(PROG) $(PROG).bin
+	$(OBJCOPY) $(OCFLAGS) ihex $(PROG) $(PROG).hex
 	$(NM) $(PROG) | sort > $(PROG).nm
 
 # ----------------------------------------------------------------------------
