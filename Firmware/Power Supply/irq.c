@@ -19,13 +19,20 @@
 // ---------------------------------------------------------------------------
 
 extern volatile unsigned int pwm_duty_cycle;
-unsigned int counter;
+
+extern volatile unsigned int current_value;
+extern volatile unsigned int current_ref_value;
+
+extern volatile unsigned int output_value;
+extern volatile unsigned int output_ref_value;
 
 // ---------------------------------------------------------------------------
 // Does some delay according to pwm_value.
 // ---------------------------------------------------------------------------
 
 void inline delay() {
+    unsigned int counter;
+
     for (counter = 0; counter < pwm_duty_cycle; counter++) {
         asm("nop");
     }
@@ -40,5 +47,13 @@ void systick() {
     gpioa_clear(PWM_OUT1); delay(); gpioa_clear(PWM_OUT1);
     gpioa_clear(PWM_OUT1); delay(); gpioa_set(PWM_OUT1);
     gpioa_clear(PWM_OUT0); delay(); gpioa_set(PWM_OUT0);
+
+    if (((output_value - output_ref_value) < 0) && 
+        ((current_value - current_ref_value) < 0)) {
+        pwm_duty_cycle += STEP_VALUE;
+    } else {
+        pwm_duty_cycle -= STEP_VALUE;
+    }
+
 }
 

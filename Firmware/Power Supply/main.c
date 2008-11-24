@@ -10,9 +10,17 @@
 #include <clock.h>
 #include <pwm.h>
 
-extern const unsigned int f_cpu;        // Frequency of CPU clock
-volatile unsigned int pwm_duty_cycle;   // Frequency of CPU clock
-volatile unsigned int adc_value;        // Current value of the analog input
+extern const unsigned int f_cpu;            // Frequency of CPU clock
+
+volatile unsigned int pwm_duty_cycle;       // Frequency of CPU clock
+
+volatile unsigned int output_value;         // Current voltage 
+                                            // of the supercapacitor
+volatile unsigned int output_ref_value;     // Max. voltage of the
+                                            // of the supercapacitor
+
+volatile unsigned int current_value;        // Current value of the current
+volatile unsigned int current_ref_value;    // Max. value of the current
 
 #define N   500000
 
@@ -48,7 +56,7 @@ int main() {
         */
 
         // Do the ADC conversion (result: lower 12 bit)
-        adc_value = adc_convert();
+        current_value = adc_convert();
     }
 }
 
