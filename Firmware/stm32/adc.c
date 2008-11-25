@@ -18,10 +18,10 @@ void adc_init() {
     
     /* Enable ADC1, ADC2 and GPIOC clock */
     RCC_APB2PeriphClockCmd(RCC_APB2Periph_ADC1 | RCC_APB2Periph_ADC2, ENABLE);
-    /* ADCCLK = PCLK2/4 */
-    RCC_ADCCLKConfig(RCC_PCLK2_Div4);
+    /* ADCCLK = PCLK2/8 = 12 MHz */
+    RCC_ADCCLKConfig(RCC_PCLK2_Div8);
 
-    /* Configure PC.01 and PC.02 (ADC Channel11 and 12) as analog input */
+    /* Configure PC.00 and PC.01 (ADC Channel10 and 11) as analog input */
     GPIO_InitStructure.GPIO_Pin = GPIO_Pin_0 | GPIO_Pin_1;
     GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AIN;
     GPIO_Init(GPIOC, &GPIO_InitStructure);
@@ -36,8 +36,7 @@ void adc_init() {
     ADC_Init(ADC1, &ADC_InitStructure);
 
     /* ADC1 regular channels configuration */
-    ADC_RegularChannelConfig(ADC1, ADC_Channel_10, 1, ADC_SampleTime_239Cycles5);
-    // ADC_RegularChannelConfig(ADC1, ADC_Channel_11, 2, ADC_SampleTime_239Cycles5);
+    ADC_RegularChannelConfig(ADC1, ADC_Channel_10, 1, ADC_SampleTime_1Cycles5);
 
     /* Enable ADC1 */
     ADC_Cmd(ADC1, ENABLE);

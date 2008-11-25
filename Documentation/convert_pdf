@@ -1,5 +1,5 @@
 #!/bin/sh
 
-nice -n 20 gs -SDEVICE=jpeg -r50x50 -sPAPERSIZE=A4 -sOutputFile=/tmp/Diploma_%03d.jpeg -dNOPAUSE -dBATCH -- Diploma.pdf
-nice -n 20 convert -verbose /tmp/Diploma_*.jpeg Diploma_safe.pdf
+nice -n 20 gs -SDEVICE=jpeg -r96x96 -sPAPERSIZE=A4 -sOutputFile=/tmp/Diploma_%03d.jpeg -dNOPAUSE -dBATCH -- Diploma.pdf
+#nice -n 20 convert -verbose -monochrome -combine /tmp/Diploma_*.jpeg Diploma_safe.pdf
 
