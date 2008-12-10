@@ -286,6 +286,7 @@ UsedLibrary="/opt/eagle-5.3.0/lbr/wuerth-elektronik.lbr"
 UsedLibrary="/opt/eagle-5.3.0/lbr/xicor.lbr"
 UsedLibrary="/opt/eagle-5.3.0/lbr/zetex.lbr"
 UsedLibrary="/opt/eagle-5.3.0/lbr/zilog.lbr"
+UsedLibrary="/home/hg8lhs/Diploma/trunk/Hardware/Power electronics/STM32.lbr"
 
 [Win_1]
 Type="Control Panel"
