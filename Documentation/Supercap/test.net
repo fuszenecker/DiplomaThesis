@@ -1,0 +1,99 @@
+# EESchema Netlist Version 1.1 created  20/12/2008-17:11:27
+(
+ ( /494D0A8A PIN_ARRAY_2X1 C1 Supercap.
+  ( 1 N-000003 )
+  ( 2 N-000006 )
+ )
+ ( /494D0A83 PIN_ARRAY_2X1 C2 Supercap.
+  ( 1 N-000006 )
+  ( 2 N-000004 )
+ )
+ ( /494D0A8D PIN_ARRAY_2X1 C3 Supercap.
+  ( 1 N-000004 )
+  ( 2 N-000007 )
+ )
+ ( /494D0ACE D3 D1 ZENER
+  ( 1 /GND )
+  ( 2 N-000001 )
+ )
+ ( /494D0AC7 D3 D2 ZENER
+  ( 1 /GND )
+  ( 2 N-000005 )
+ )
+ ( /494D0ABD PIN_ARRAY_2X1 P1 Vout
+  ( 1 /GND )
+  ( 2 N-000005 )
+ )
+ ( /494D0ABE PIN_ARRAY_2X1 P2 S_PWR
+  ( 1 /GND )
+  ( 2 N-000008 )
+ )
+ ( /494D0DD6 PIN_ARRAY_2X1 P3 Iout
+  ( 1 /GND )
+  ( 2 N-000001 )
+ )
+ ( /494D0AB4 PIN_ARRAY_2X1 P4 Power
+  ( 1 N-000003 )
+  ( 2 /GND )
+ )
+ ( /494D0AF0 R1 R1 R
+  ( 1 N-000002 )
+  ( 2 N-000001 )
+ )
+ ( /494D0AE8 R1 R2 R
+  ( 1 N-000005 )
+  ( 2 /GND )
+ )
+ ( /494D0AE1 R1 R3 R
+  ( 1 N-000003 )
+  ( 2 N-000005 )
+ )
+ ( /494D0D77 CB U1 ACS756
+  ( 1 N-000008 )
+  ( 2 /GND )
+  ( 3 N-000002 )
+  ( 4 N-000007 )
+  ( 5 /GND )
+ )
+)
+*
+{ Allowed footprints by component:
+$component C1
+ CP*
+ SM*
+$endlist
+$component C2
+ CP*
+ SM*
+$endlist
+$component C3
+ CP*
+ SM*
+$endlist
+$component D1
+ D?
+ SO*
+ SM*
+$endlist
+$component D2
+ D?
+ SO*
+ SM*
+$endlist
+$component R1
+ R?
+ SM0603
+ SM0805
+$endlist
+$component R2
+ R?
+ SM0603
+ SM0805
+$endlist
+$component R3
+ R?
+ SM0603
+ SM0805
+$endlist
+$endfootprintlist
+}

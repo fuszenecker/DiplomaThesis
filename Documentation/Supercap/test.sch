@@ -1,6 +1,6 @@
 EESchema Schematic File Version 2
 LIBS:power,curr_sens,device,transistors,conn,linear,regul,74xx,cmos4000,adc-dac,memory,xilinx,special,microcontrollers,dsp,microchip,analog_switches,motorola,texas,intel,audio,interface,digital-audio,philips,display,cypress,siliconi,opto,contrib,valves
-EELAYER 43  0
+EELAYER 24  0
 EELAYER END
 $Descr A4 11700 8267
 Sheet 1 1
@@ -13,6 +13,9 @@ Comment2 ""
 Comment3 ""
 Comment4 ""
 $EndDescr
+Kmarq B 4000 6500 "Warning Pin power_in not driven (Net 9)" F=1
+Text Label 4000 6500 0    60   ~
+GND
 Connection ~ 5150 3950
 Connection ~ 4000 5900
 Wire Wire Line
@@ -68,49 +71,47 @@ Text Label 4900 4550 0    60   ~
 GND
 Text Label 3750 5550 0    60   ~
 GND
-Text Label 4100 6400 0    60   ~
-GND
 $Comp
-L GND #PWR3
+L GND #PWR01
 U 1 1 494D0EBF
 P 4000 6500
-F 0 "#PWR3" H 4000 6500 30  0001 C C
+F 0 "#PWR01" H 4000 6500 30  0001 C C
 F 1 "GND" H 4000 6430 30  0001 C C
 	1    4000 6500
 	1    0    0    -1  
 $EndComp
 $Comp
-L GND #PWR2
+L GND #PWR02
 U 1 1 494D0EB8
 P 3750 5650
-F 0 "#PWR2" H 3750 5650 30  0001 C C
+F 0 "#PWR02" H 3750 5650 30  0001 C C
 F 1 "GND" H 3750 5580 30  0001 C C
 	1    3750 5650
 	1    0    0    -1  
 $EndComp
 $Comp
-L GND #PWR5
+L GND #PWR03
 U 1 1 494D0EAF
 P 5150 4550
-F 0 "#PWR5" H 5150 4550 30  0001 C C
+F 0 "#PWR03" H 5150 4550 30  0001 C C
 F 1 "GND" H 5150 4480 30  0001 C C
 	1    5150 4550
 	1    0    0    -1  
 $EndComp
 $Comp
-L GND #PWR4
+L GND #PWR04
 U 1 1 494D0EAD
 P 4900 4550
-F 0 "#PWR4" H 4900 4550 30  0001 C C
+F 0 "#PWR04" H 4900 4550 30  0001 C C
 F 1 "GND" H 4900 4480 30  0001 C C
 	1    4900 4550
 	1    0    0    -1  
 $EndComp
 $Comp
-L GND #PWR1
+L GND #PWR05
 U 1 1 494D0EA4
 P 3750 4550
-F 0 "#PWR1" H 3750 4550 30  0001 C C
+F 0 "#PWR05" H 3750 4550 30  0001 C C
 F 1 "GND" H 3750 4480 30  0001 C C
 	1    3750 4550
 	1    0    0    -1  
