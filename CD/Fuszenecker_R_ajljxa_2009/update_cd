@@ -1,0 +1,13 @@
+#!/bin/sh
+
+SRC=../..
+
+cp $SRC/Documentation/Diploma.pdf Szakdolgozat.pdf
+tar czvf crypto4o-4.1.8.tar.gz $SRC/Crypto4o
+
+echo; echo
+echo "Copy SVN_ROOT/Diploma here, compress and encrypt it"
+echo
+
+read a
+
