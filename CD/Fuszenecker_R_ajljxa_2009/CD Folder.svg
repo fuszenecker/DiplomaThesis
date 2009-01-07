@@ -60,8 +60,8 @@
        dotted="false"
        empcolor="#0000ff"
        empopacity="0.07843137"
-       spacingx="10mm"
-       spacingy="10mm" />
+       spacingx="5mm"
+       spacingy="5mm" />
     <sodipodi:guide
        orientation="1,0"
        position="176.7767,172.73609"
@@ -128,32 +128,33 @@
        id="path2411" />
     <path
        style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       d="M 176.7767,343.70077 L 106.29921,379.13384 L 106.29921,627.16533 L 177.16535,662.4433"
-       id="path2413" />
+       d="M 176.7767,343.70077 L 106.29921,361.4173 L 106.29921,644.88187 L 177.16535,662.4433"
+       id="path2413"
+       sodipodi:nodetypes="cccc" />
     <path
        style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       d="M 496.06299,343.23509 L 566.92913,379.13384 L 566.92913,627.16533 L 496.06299,662.5984"
-       id="path2415" />
+       d="M 496.06299,343.23509 L 566.92913,361.4173 L 566.92913,644.88187 L 496.06299,662.5984"
+       id="path2415"
+       sodipodi:nodetypes="cccc" />
     <path
        style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       d="M 177.16535,343.70077 L 212.59843,272.83462 L 460.62992,272.83462 L 496.06299,343.70077"
-       id="path2417" />
+       d="M 177.16535,343.70077 L 194.88189,272.83462 L 478.34646,272.83462 L 496.06299,343.70077"
+       id="path2417"
+       sodipodi:nodetypes="cccc" />
     <flowRoot
        xml:space="preserve"
        id="flowRoot2427"
        style="font-size:14px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:DejaVu Sans;-inkscape-font-specification:DejaVu Sans"
-       transform="translate(11.270546,-22.404636)"><flowRegion
+       transform="translate(8.2351439,-39.333394)"><flowRegion
          id="flowRegion2429"><rect
            id="rect2431"
            width="250.35933"
-           height="250.77647"
+           height="286.05444"
            x="199.00005"
            y="398.79349"
            style="font-size:14px" /></flowRegion><flowPara
          style="font-size:10px;text-align:center;text-anchor:middle"
-         id="flowPara2492">Fuszenecker Róbert</flowPara><flowPara
-         style="font-size:10px;text-align:center;text-anchor:middle"
-         id="flowPara2524">AJLJXA</flowPara><flowPara
+         id="flowPara2524">Fuszenecker Róbert - AJLJXA</flowPara><flowPara
          id="flowPara2435"
          style="font-size:10px;text-align:center;text-anchor:middle" /><flowPara
          id="flowPara2437"
@@ -161,24 +162,30 @@
          id="flowPara2439"
          style="font-size:12px;font-weight:bold;text-align:center;text-anchor:middle;-inkscape-font-specification:DejaVu Sans Bold" /><flowPara
          id="flowPara2460"
-         style="font-size:10px;font-weight:bold;-inkscape-font-specification:DejaVu Sans Bold;text-anchor:middle;text-align:center">Design of a high-power emergency  supply</flowPara><flowPara
+         style="font-size:10px;font-weight:bold;text-align:center;text-anchor:middle;-inkscape-font-specification:DejaVu Sans Bold">Design of a high-power emergency  supply</flowPara><flowPara
          id="flowPara2443"
          style="font-size:10px;font-weight:bold;-inkscape-font-specification:DejaVu Sans Bold" /><flowPara
          id="flowPara2462"
-         style="font-size:10px;text-anchor:middle;text-align:center">2009. őszi félév</flowPara><flowPara
+         style="font-size:10px;text-align:center;text-anchor:middle">2009. őszi félév</flowPara><flowPara
          id="flowPara2445"
-         style="font-size:10px;text-anchor:middle;text-align:center" /><flowPara
+         style="font-size:10px;text-align:center;text-anchor:middle" /><flowPara
          id="flowPara2464"
-         style="font-size:10px;text-anchor:middle;text-align:center">Kandó Kálmán Villamosmérnöki Kar</flowPara><flowPara
+         style="font-size:10px;text-align:center;text-anchor:middle">Kandó Kálmán Villamosmérnöki Kar</flowPara><flowPara
          id="flowPara2441"
-         style="font-size:10px;text-anchor:middle;text-align:center">Vilamosmérnöki szak</flowPara><flowPara
+         style="font-size:10px;text-align:center;text-anchor:middle">Vilamosmérnöki szak</flowPara><flowPara
          id="flowPara2466"
-         style="font-size:10px;text-anchor:middle;text-align:center">Műszer-automatika szakirány</flowPara><flowPara
-         style="font-size:10px;text-anchor:middle;text-align:center"
+         style="font-size:10px;text-align:center;text-anchor:middle">Műszer-automatika szakirány</flowPara><flowPara
+         style="font-size:10px;text-align:center;text-anchor:middle"
          id="flowPara2502">Automata gyártórendszerek modul</flowPara><flowPara
-         style="font-size:10px;text-anchor:middle;text-align:center"
+         style="font-size:10px;text-align:center;text-anchor:middle"
+         id="flowPara2537" /><flowPara
+         style="font-size:10px;text-align:center;text-anchor:middle"
+         id="flowPara2533">Automatika és Digitális technika</flowPara><flowPara
+         style="font-size:10px;text-align:center;text-anchor:middle"
+         id="flowPara2535">Automatizált gyártórendszerek</flowPara><flowPara
+         style="font-size:10px;text-align:center;text-anchor:middle"
          id="flowPara2488" /><flowPara
-         style="font-size:10px;text-anchor:middle;text-align:center"
+         style="font-size:10px;text-align:center;text-anchor:middle"
          id="flowPara2490" /></flowRoot>    <flowRoot
        xml:space="preserve"
        id="flowRoot2472"
@@ -189,7 +196,7 @@
            height="14.142136"
            x="246.47722"
            y="431.11838" /></flowRegion><flowPara
-         id="flowPara2478"></flowPara></flowRoot>    <flowRoot
+         id="flowPara2478" /></flowRoot>    <flowRoot
        xml:space="preserve"
        id="flowRoot2480"
        style="fill:black;stroke:none;stroke-opacity:1;stroke-width:1px;stroke-linejoin:miter;stroke-linecap:butt;fill-opacity:1;font-family:DejaVu Sans;font-style:normal;font-weight:normal;font-size:12;-inkscape-font-specification:DejaVu Sans;font-stretch:normal;font-variant:normal"><flowRegion
@@ -199,20 +206,20 @@
            height="28.284271"
            x="201.02036"
            y="414.95593" /></flowRegion><flowPara
-         id="flowPara2486"></flowPara></flowRoot>    <path
+         id="flowPara2486" /></flowRoot>    <path
        style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       d="M 212.59843,591.73226 L 460.62992,591.73226"
+       d="M 212.59843,634.88187 L 460.62992,634.88187"
        id="path2494" />
     <text
        xml:space="preserve"
-       style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:DejaVu Sans;-inkscape-font-specification:DejaVu Sans"
-       x="230.59842"
-       y="607.16534"
+       style="font-size:10px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:DejaVu Sans;-inkscape-font-specification:DejaVu Sans"
+       x="248.31496"
+       y="607.44879"
        id="text2496"><tspan
          sodipodi:role="line"
          id="tspan2498"
-         x="230.59842"
-         y="607.16534">Dr. Schuster György, főiskolai tanár</tspan></text>
+         x="248.31496"
+         y="607.44879">Dr. Schuster György, főiskolai tanár</tspan></text>
     <flowRoot
        xml:space="preserve"
        id="flowRoot2526"
@@ -223,5 +230,19 @@
            height="54.548237"
            x="196.97975"
            y="578.60065" /></flowRegion><flowPara
-         id="flowPara2532"></flowPara></flowRoot>  </g>
+         id="flowPara2532" /></flowRoot>    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="M 212.59843,595.73226 C 295.27559,595.73226 377.95276,595.73226 460.62992,595.73226"
+       id="path2541" />
+    <text
+       xml:space="preserve"
+       style="font-size:10px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:DejaVu Sans;-inkscape-font-specification:DejaVu Sans"
+       x="266.03149"
+       y="644.8819"
+       id="text2543"><tspan
+         sodipodi:role="line"
+         id="tspan2545"
+         x="266.03149"
+         y="644.8819">Fuszenecker Róbert, hallgató</tspan></text>
+  </g>
 </svg>
